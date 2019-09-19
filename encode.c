@@ -11,18 +11,17 @@ int main(int nargs, char ** cargs) {
 	if(padding==2){padding=1;}
 	if(padding==1){padding=2;}
 	int i;
-	for(i=0;i<strlen(example)-3;i=i+3){
-		if(strlen(example)<=3){
-			break;
+	if(strlen(example)>3){
+		for(i=0;i<strlen(example)-3;i=i+3){
+			output[j]=(example[i] & 0b11111100)>>2;
+			j++;
+			output[j]=((example[i] & 0b00000011)<<4)|((example[i+1]&0b11110000)>>4);
+			j++;
+			output[j]=((example[i+1]&0b00001111)<<2)|((example[i+2]&0b11000000)>>6);
+			j++;
+			output[j]=example[i+2]&0b00111111;
+			j++;
 		}
-		output[j]=(example[i] & 0b11111100)>>2;
-		j++;
-		output[j]=((example[i] & 0b00000011)<<4)|((example[i+1]&0b11110000)>>4);
-		j++;
-		output[j]=((example[i+1]&0b00001111)<<2)|((example[i+2]&0b11000000)>>6);
-		j++;
-		output[j]=example[i+2]&0b00111111;
-		j++;
 	}
 	switch(padding){
 		case 1:
